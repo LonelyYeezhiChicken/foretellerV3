@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="~/css/admin/fonts-all.css">
+    <link rel="stylesheet" href="~/css/admin/icon-all.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/admin/nucleo-icons.css">
+    <link rel="stylesheet" href="~/css/admin/black-dashboard.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    <link rel="shortcut icon" href="~/img/favicon.ico" asp-append-version="true">
+    <title>@ViewData["Title"] - Catcher.Web</title>
+</head>
+<body class="">
+   @RenderBody()
+
+    <script type="text/javascript">
+        window.root = "@Url.Content("~/")";
+    </script>
+<!-- Core -->
+    <script src="~/js/admin/core/jquery.min.js"></script>
+    <script src="~/js/admin/core/popper.min.js"></script>
+    <script src="~/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="~/lib/underscore/underscore.js"></script>
+    <script src="~/js/admin/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <script src="~/js/admin/plugins/bootstrap-notify.js"></script>
+
+    <!-- Theme JS -->
+    <script src="~/js/admin/black-dashboard.min.js"></script>
+    <script src="~/js/site.js"></script>
+    <script src="~/js/_layout.js"></script>
+
+    <!-- axios -->
+    <script src="~/js/axios/axios.min.js"></script>
+    <script src="~/js/utils/axiosPlugin.js"></script>
+    <script src="~/js/api/api.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
