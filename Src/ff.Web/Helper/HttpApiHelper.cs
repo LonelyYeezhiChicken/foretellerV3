@@ -62,9 +62,9 @@ namespace ff.Web.Helper
                 if (headers != null)
                     SetHeader(client, headers);
 
-                HttpResponseMessage rep =await client.GetAsync(Path + func + data);
+                HttpResponseMessage rep = await client.GetAsync(Path + func + data);
                 rep.EnsureSuccessStatusCode();
-                string res =await rep.Content.ReadAsStringAsync();
+                string res = await rep.Content.ReadAsStringAsync();
 
                 obj = JsonConvert.DeserializeObject<T>(res);
             }
@@ -89,7 +89,7 @@ namespace ff.Web.Helper
                 var stringContent = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage rep = await client.PostAsync(Path + func, stringContent);
                 rep.EnsureSuccessStatusCode();
-                string res =await rep.Content.ReadAsStringAsync();
+                string res = await rep.Content.ReadAsStringAsync();
 
                 obj = JsonConvert.DeserializeObject<T>(res);
             }

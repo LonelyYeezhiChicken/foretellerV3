@@ -5,3 +5,7 @@ const userLogin = (data) => {
 const createTest = () => {
     return req.get(`ErrorReportApi/Create`);
 };
+
+const loadCarKind = () => {
+    return req.get(`CarKindApi/Load`);
+};

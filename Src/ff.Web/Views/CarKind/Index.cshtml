@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Car Kind";
+}
+@section scripts{
+<link rel="stylesheet" href="~/css/sweetalert/sweetalert-dark.css">
+<script src="~/lib/sweetalert/sweetalert.min.js"></script>
+<script src="~/js/utils/bsUtil.js"></script>
+<script src="~/lib/underscore/underscore.js"></script>
+<script src="~/js/pagejs/carkind/carkind.js"></script>
+<script>
+    const bsUtil = new BsUtil();
+    create();
+</script>
+}
+
+<h1> <i class="tim-icons icon-delivery-fast"></i> @ViewData["Title"]</h1>
+<div class="content" onload="create()">
+ <div class="row mb-2">
+      <div class="col-md-9">
+          <form class="form-horizontal">
+               <div class="form-group row">
+                   <label class="col-form-label text-primary">車種:</label>
+                   <div class="col-lg-3 col-sm-3">
+                       <input type="text" class="form-control" id="strKind" placeholder="搜尋車種" autocomplete="off">
+                   </div>
+                   <button type="button" class="btn btn-primary disabledswitch" data-toggle="tooltip" title="搜尋"  onclick="toFind()"><i class="tim-icons icon-zoom-split"></i>搜尋</button>
+               </div>
+           </form>
+      </div>
+      <div class="col-md-3">
+          <button type="button" class="btn btn-primary disabledswitch" data-toggle="tooltip" title="新增"  onclick="toFind()"><i class="tim-icons icon-simple-add"></i></button>
+      </div>
+ </div>
+   <div class="row">
+     <div class="col-md-12">
+       <div class="card ">
+         <div class="card-header">
+           <h4 class="card-title">車種列表</h4>
+         </div>
+         <div class="card-body">
+           <div class="table-responsive">
+             <table class="table tablesorter " id="">
+               <thead class=" text-primary">
+                 <tr>
+                   <th class="col-md-1">
+                     #
+                   </th>
+                   <th class="col-md-4">
+                     車種
+                   </th>
+                   <th class="col-md-3">
+                     年份
+                   </th>
+                   <th class="col-md-4 text-center">
+                     設定
+                   </th>
+                 </tr>
+               </thead>
+               <tbody id="car-tbody">
+
+               </tbody>
+             </table>
+           </div>
+         </div>
+       </div>
+     </div>
+    </div>
+ </div>

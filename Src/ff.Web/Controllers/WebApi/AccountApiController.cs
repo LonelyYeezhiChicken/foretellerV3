@@ -1,6 +1,7 @@
 ﻿using ff.Web.Helper;
 using ff.Web.Models;
 using ff.Web.Models.ApiModel;
+using ff.Web.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ff.Web.Controllers.WebApi
@@ -13,7 +14,7 @@ namespace ff.Web.Controllers.WebApi
 
         public AccountApiController()
         {
-            httpApiHelper = new HttpApiHelper(@"https://localhost:7090/Account");
+            httpApiHelper = new HttpApiHelper(ApiConfig.Url);
         }
 
         [HttpPost("Login")]
@@ -21,7 +22,7 @@ namespace ff.Web.Controllers.WebApi
         {
             try
             {
-                var res = await httpApiHelper.Post<JwtModel>("", model);
+                var res = await httpApiHelper.Post<JwtModel>("Account", model);
                 return Ok(res.token.result);
             }
             catch (Exception ex)
