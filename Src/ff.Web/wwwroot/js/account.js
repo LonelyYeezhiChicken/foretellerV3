@@ -6,8 +6,8 @@
  */
 function getApiData() {
     return {
-        User: document.getElementById("username_login").value,
-        Mema: document.getElementById("pwd_login").value,
+        UserName: document.getElementById("username_login").value,
+        Password: document.getElementById("pwd_login").value,
         RememberMe: false
     };
 }
@@ -46,7 +46,7 @@ function setToken(authToken) {
     if (checkAuthToken(authToken) === true) {
         let date = new Date();
         date.setTime(date.getTime() + (100 * 60 * 1000)); //100 minute
-        createCookie('AUTH_TOKEN', authToken, date);
+        createCookie('APP_TOKEN', authToken, date);
     }
 }
 
@@ -62,11 +62,14 @@ let toLogin = _.throttle(function () {
 
     // send api to login
     userLogin(data).then((res) => {
+        console.log(res.data);
         console.log(res);
-        if (res.data.code === '0000') {
+        console.log(url);
+        if (res.data !== null && res.data !== undefined && res.data !== '' ) {
             console.log('登入成功');
             // set token to cookie
-            setToken(res.data.data);
+            setToken(res.data);
+            window.location = url;
         }
         else {
             // show error message

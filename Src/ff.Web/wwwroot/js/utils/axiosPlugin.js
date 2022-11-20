@@ -12,10 +12,12 @@ const instance = axios.create({
 function getAuthorizationHeader() {
     const GMTString = new Date().toGMTString();
 
+    let token = readCookie('APP_TOKEN');
     return {
         // 'Accept-Encoding': 'gzip',
         'Content-Type': 'application/json',
-        'X-Date': GMTString
+        'X-Date': GMTString,
+        'APP_TOKEN': token??''
     };
 }
 

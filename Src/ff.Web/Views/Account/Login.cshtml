@@ -6,41 +6,10 @@
 @section scripts{
     <link rel="stylesheet" href="~/css/sweetalert/sweetalert-dark.css">
     <script src="~/lib/sweetalert/sweetalert.min.js"></script>
-    <script src="~/js/cookie.js"></script>
     <script src="~/js/account.js"></script>
-  @*  <script>
-        /**
-         * Set api data
-         */
-        function GetApiData() {
-            return {
-                User: document.getElementById("username_login").value,
-                Mema: document.getElementById("pwd_login").value,
-                RememberMe: false
-            };
-        }
-
-        /**
-         * login
-         */
-        let ToLogin = _.throttle(function() {
-            let data = GetApiData();
-
-            if (data.User === '' || data.Mema === '')
-                return;
-
-            userLogin(data).then((res) => {
-                console.log(res);
-                if (res.data.code === '0000') {
-                    console.log('登入成功');
-                }
-                else {
-                    let errorMessage = document.getElementById("errorMessage");
-                    errorMessage.textContent = res.data.data;
-                }
-            });
-        }, 5000);
-    </script>*@
+    <script>
+              let url =  "@Url.Content("~/")"+"Home/Index";
+    </script>
 
 }
 
@@ -53,10 +22,10 @@
                             <form role="form" onsubmit="return false">
 
                                 <div class="card-header">
-                                    <h3 class="title">Login</h3>
+                                    <h3 class="title">預言家</h3>
 
                                     <h6 class="card-category">
-                                        Start Using Catcher~
+                                       歡迎回到預言家~
                                     </h6>
                                 </div>
 
@@ -66,7 +35,7 @@
 
                                         <div class="col-md-8 px-md-1">
                                             <div class="form-group">
-                                                <label>Username</label>
+                                                <label>User Name</label>
                                                 <input class="form-control" id="username_login" name="username" required="" type="text" value="">
                                             </div>
                                         </div>
