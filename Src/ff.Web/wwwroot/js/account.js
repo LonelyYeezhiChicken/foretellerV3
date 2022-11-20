@@ -6,8 +6,8 @@
  */
 function getApiData() {
     return {
-        User: document.getElementById("username_login").value,
-        Mema: document.getElementById("pwd_login").value,
+        UserName: document.getElementById("username_login").value,
+        Password: document.getElementById("pwd_login").value,
         RememberMe: false
     };
 }
@@ -62,11 +62,14 @@ let toLogin = _.throttle(function () {
 
     // send api to login
     userLogin(data).then((res) => {
+        console.log(res.data);
         console.log(res);
-        if (res.data.code === '0000') {
+        console.log(url);
+        if (res.data !== null && res.data !== undefined && res.data !== '' ) {
             console.log('登入成功');
             // set token to cookie
             setToken(res.data.data);
+            window.location = url;
         }
         else {
             // show error message
