@@ -2,7 +2,6 @@
 using ff.Web.Models.ApiModel;
 using ff.Web.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace ff.Web.Controllers.WebApi
 {
@@ -34,6 +33,9 @@ namespace ff.Web.Controllers.WebApi
             }
             catch (Exception ex)
             {
+                if (ex.Message.Contains("Unauthorized"))
+                    return Unauthorized();
+
                 return BadRequest();
             }
         }
