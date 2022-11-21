@@ -19,7 +19,7 @@ const editCarKind = (data) => {
 
 // 刪除資料
 const delCarKind = (data) => {
-    return req.post(`CarKindApi/Delete`, data);
+    return req.delete(`CarKindApi/Delete`, data);
 };
 
 // 新增資料
@@ -29,5 +29,5 @@ const addCarKind = (data) => {
 
 // 搜尋資料
 const findCarKind = (data) => {
-    return req.get(`CarKindApi/Find`, data);
+    return req.post(`CarKindApi/Find`, data);
 };

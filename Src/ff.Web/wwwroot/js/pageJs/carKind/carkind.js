@@ -37,12 +37,15 @@ let toEdit = _.throttle(function (id) {
 /** 刪除 */
 let toDelete = _.throttle(function (id) {
     console.log('Del');
-    console.log(id);
+    delCarKind({ id: id }).then((res) => {
+        if (res.data === 'OK')
+            location.reload();
+    });
 }, 5000);
 
 /** 新增 */
 let toAdd = _.throttle(function () {
-    let data = GetViewData();
+    let data = getViewData();
 
     addCarKind(data).then((res) => {
         if (res.data === 'OK')
@@ -92,7 +95,7 @@ function toClear() {
 }
 
 /** 取出畫面資料 */
-function GetViewData() {
+function getViewData() {
     let id = document.getElementById("carId-set").value;
     let name = document.getElementById("carName-set").value;
     let year = document.getElementById("carYear-set").value;
@@ -101,5 +104,5 @@ function GetViewData() {
         Id: id,
         Name: name,
         Year: year
-    }
+    };
 }

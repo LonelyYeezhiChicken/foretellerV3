@@ -38,7 +38,7 @@ namespace ff.Web.Helper
         /// <param name="func">網址方法</param>
         /// <param name="jsonData">參數</param>
         /// <returns>資料模型 AS T</returns>
-        Task<T> Delete<T>(string func, object jsonData, Dictionary<string, string> headers = null) where T : class;
+        Task<T> Delete<T>(string func, string data = "", Dictionary<string, string> headers = null) where T : class;
     }
     public class HttpApiHelper : IHttpApiHelper
     {
@@ -147,16 +147,14 @@ namespace ff.Web.Helper
         /// <param name="func">網址方法</param>
         /// <param name="jsonData">參數</param>
         /// <returns>資料模型 AS T</returns>
-        public async Task<T> Delete<T>(string func, object jsonData, Dictionary<string, string> headers = null) where T : class
+        public async Task<T> Delete<T>(string func, string data = "", Dictionary<string, string> headers = null) where T : class
         {
-            string data = JsonConvert.SerializeObject(jsonData);
             T obj = null;
             using (HttpClient client = new())
             {
                 if (headers != null)
                     SetHeader(client, headers);
 
-                var stringContent = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage rep = await client.DeleteAsync(Path + func + data);
                 rep.EnsureSuccessStatusCode();
                 string res = await rep.Content.ReadAsStringAsync();

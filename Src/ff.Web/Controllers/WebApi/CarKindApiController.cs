@@ -84,7 +84,7 @@ namespace ff.Web.Controllers.WebApi
             try
             {
                 var header = GetHeader();
-                var res = await httpApiHelper.Post<List<CarKindModel>>(carKind,
+                var res = await httpApiHelper.Post<string>(carKind,
                     new CarKindModel()
                     {
                         Id = carKindData.Id,
@@ -106,7 +106,7 @@ namespace ff.Web.Controllers.WebApi
             try
             {
                 var header = GetHeader();
-                var res = await httpApiHelper.Put<List<CarKindModel>>(carKind,
+                var res = await httpApiHelper.Put<string>(carKind,
                     new CarKindModel()
                     {
                         Id = carKindData.Id,
@@ -122,20 +122,14 @@ namespace ff.Web.Controllers.WebApi
         }
 
         // 刪除
-        [HttpPost("Delete")]
-        public async Task<IActionResult> Delete(CarkindViewModel carKindData)
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete([FromQuery] string id)
         {
             try
             {
                 var header = GetHeader();
-                var res = await httpApiHelper.Put<List<CarKindModel>>(carKind,
-                    new CarKindModel()
-                    {
-                        Id = carKindData.Id,
-                        Name = carKindData.Name,
-                        Year = carKindData.Year,
-                    }, header);
-                return Ok(res);
+                var res = await httpApiHelper.Delete<string>(carKind, $"?id={id}", header);
+                return Ok("OK");
             }
             catch (Exception ex)
             {
