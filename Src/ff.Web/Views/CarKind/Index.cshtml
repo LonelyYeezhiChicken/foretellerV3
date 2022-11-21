@@ -14,6 +14,38 @@
 }
 
 <h1> <i class="tim-icons icon-delivery-fast"></i> @ViewData["Title"]</h1>
+     <div class="modal fade" id="setCarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">設定</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+           <div class="modal-body">
+            <form onsubmit="return false">
+              <div class="form-group">
+                <label for="carId-set" class="col-form-label">Id:</label>
+                <input type="text" class="form-control" id="carId-set" disabled>
+              </div> 
+              <div class="form-group">
+                <label for="carName-set" class="col-form-label">車種:</label>
+                    <input type="text" class="form-control text-muted" id="carName-set">
+              </div> 
+              <div class="form-group">
+                <label for="carYear-set" class="col-form-label">年份:</label>
+                <input type="number" class="form-control text-muted" id="carYear-set">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="toClear()">Close</button>
+            <button type="button" class="btn btn-primary" onclick="toAdd()">確定</button>
+          </div>
+        </div>
+      </div>
+    </div>
 <div class="content" onload="create()">
  <div class="row mb-2">
       <div class="col-md-9">
@@ -28,7 +60,7 @@
            </form>
       </div>
       <div class="col-md-3">
-          <button type="button" class="btn btn-primary disabledswitch" data-toggle="tooltip" title="新增"  onclick="toFind()"><i class="tim-icons icon-simple-add"></i></button>
+        <button type="button" class="btn btn-primary disabledswitch" data-toggle="tooltip" title="新增"  onclick="toShowAdd()"><i class="tim-icons icon-simple-add"></i></button>
       </div>
  </div>
    <div class="row">

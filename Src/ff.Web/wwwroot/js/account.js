@@ -62,9 +62,6 @@ let toLogin = _.throttle(function () {
 
     // send api to login
     userLogin(data).then((res) => {
-        console.log(res.data);
-        console.log(res);
-        console.log(url);
         if (res.data !== null && res.data !== undefined && res.data !== '' ) {
             console.log('登入成功');
             // set token to cookie
