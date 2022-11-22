@@ -87,7 +87,15 @@ let toShowEdit = _.throttle(function (id) {
 
     document.getElementById("carId-set").value = data[0].id;
     document.getElementById("carName-set").value = data[0].name;
-    document.getElementById("carYear-set").value = data[0].year;
+    document.getElementById("carComBackLong-set").value = data[0].comBackLong;
+    document.getElementById("carComBackTime-set").value = data[0].comBackTime;
+    document.getElementById("carCostAmount-set").value = data[0].costAmount;
+    document.getElementById("carSaleAmount-set").value = data[0].saleAmount;
+    document.getElementById("carCount-set").value = data[0].count;
+    document.getElementById("carLowItem-set").value = data[0].lowItem;
+    document.getElementById("carMemo-set").value = data[0].memo;
+    document.getElementById("carKind-set").value = data[0].carType;
+
 
     isEdit = true;
     //顯示
