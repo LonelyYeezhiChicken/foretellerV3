@@ -2,6 +2,12 @@
 {
     public class Customer
     {
+        public Customer()
+        {
+            UpdateTime = DateTime.Now;
+            UpdateUserId = "";
+            StoreId = "";
+        }
         public string Id { get; set; }
         public string StoreId { get; set; }
         public string Name { get; set; }
