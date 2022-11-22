@@ -85,11 +85,19 @@ namespace ff.Web.Controllers.WebApi
             {
                 var header = GetHeader();
                 var res = await httpApiHelper.Post<string>(itemMain,
-                    new CarKindModel()
+                    new ItemMain()
                     {
                         Id = carKindData.Id,
                         Name = carKindData.Name,
-                        //Year = carKindData.Year,
+                        CostAmount = carKindData.CostAmount,
+                        SaleAmount = carKindData.SaleAmount,
+                        Count = carKindData.Count,
+                        LowItem = carKindData.LowItem,
+                        CarType = carKindData.CarType,
+                        Car = carKindData.Car,
+                        ComBackLong = carKindData.ComBackLong,
+                        ComBackTime = carKindData.ComBackTime,
+                        Memo = carKindData.Memo,
                     }, header);
                 return Ok("OK");
             }
@@ -111,7 +119,7 @@ namespace ff.Web.Controllers.WebApi
                     {
                         Id = carKindData.Id,
                         Name = carKindData.Name,
-                       // Year = carKindData.Year,
+                        // Year = carKindData.Year,
                     }, header);
                 return Ok(res);
             }
