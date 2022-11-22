@@ -5,6 +5,15 @@ function create() {
     loadItemMain().then((res) => {
         render(res);
     });
+    loadCarKind().then((res) => {
+        carkindList = res.data.map(v => {
+            return {
+                id: v.id,
+                name: v.name
+            };
+        });
+        bsUtil.createSelect(carkindList, "carKind-set");
+    });
 }
 
 /** 畫面渲染
@@ -31,7 +40,7 @@ function render(res) {
 /** 刪除 */
 let toDelete = _.throttle(function (id) {
     console.log('Del');
-    delCarKind({ id: id }).then((res) => {
+    delItemMain({ id: id }).then((res) => {
         if (res.data === 'OK')
             location.reload();
     });
@@ -43,12 +52,12 @@ let toAddOrUpdate = _.throttle(function () {
 
     // 判斷新增或修改
     if (isEdit === true) {
-        editCarKind(data).then((res) => {
+        editItemMain(data).then((res) => {
             if (res.data === 'OK')
                 location.reload();
         });
     } else {
-        addCarKind(data).then((res) => {
+        addItemMain(data).then((res) => {
             if (res.data === 'OK')
                 location.reload();
         });
@@ -78,7 +87,15 @@ let toShowEdit = _.throttle(function (id) {
 
     document.getElementById("carId-set").value = data[0].id;
     document.getElementById("carName-set").value = data[0].name;
-    document.getElementById("carYear-set").value = data[0].year;
+    document.getElementById("carComBackLong-set").value = data[0].comBackLong;
+    document.getElementById("carComBackTime-set").value = data[0].comBackTime;
+    document.getElementById("carCostAmount-set").value = data[0].costAmount;
+    document.getElementById("carSaleAmount-set").value = data[0].saleAmount;
+    document.getElementById("carCount-set").value = data[0].count;
+    document.getElementById("carLowItem-set").value = data[0].lowItem;
+    document.getElementById("carMemo-set").value = data[0].memo;
+    document.getElementById("carKind-set").value = data[0].carType;
+
 
     isEdit = true;
     //顯示
@@ -89,18 +106,40 @@ let toShowEdit = _.throttle(function (id) {
 function toClear() {
     document.getElementById("carId-set").value = "";
     document.getElementById("carName-set").value = "";
-    document.getElementById("carYear-set").value = "";
+    document.getElementById("carComBackLong-set").value = 0;
+    document.getElementById("carComBackTime-set").value = 0;
+    document.getElementById("carCostAmount-set").value = 0;
+    document.getElementById("carSaleAmount-set").value = 0;
+    document.getElementById("carCount-set").value = 0;
+    document.getElementById("carLowItem-set").value = 0;
+    document.getElementById("carMemo-set").value = "";
 }
 
 /** 取出畫面資料 */
 function getViewData() {
-    let id = document.getElementById("carId-set").value;
-    let name = document.getElementById("carName-set").value;
-    let year = document.getElementById("carYear-set").value;
+
+    let carId = document.getElementById("carId-set").value;
+    let carName = document.getElementById("carName-set").value;
+    let carComBackLong = document.getElementById("carComBackLong-set").value;
+    let carComBackTime = document.getElementById("carComBackTime-set").value;
+    let carCostAmount = document.getElementById("carCostAmount-set").value;
+    let carSaleAmount = document.getElementById("carSaleAmount-set").value;
+    let carCount = document.getElementById("carCount-set").value;
+    let carLowItem = document.getElementById("carLowItem-set").value;
+    let carMemo = document.getElementById("carMemo-set").value;
+    let carKind = document.getElementById("carKind-set").value;
 
     return {
-        Id: id,
-        Name: name,
-        Year: year
+        Id: carId,
+        Name: carName,
+        ComBackLong: carComBackLong,
+        ComBackTime: carComBackTime,
+        CostAmount: carCostAmount,
+        SaleAmount: carSaleAmount,
+        Count: carCount,
+        LowItem: carLowItem,
+        Memo: carMemo,
+        CarType: carKind,
+        Car: ''
     };
 }

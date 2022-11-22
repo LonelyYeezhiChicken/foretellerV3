@@ -45,4 +45,16 @@
         }
         parent.appendChild(rowData);
     }
+
+    /**
+     * 動態生成下拉選單
+     * @param {any} data
+     * @param {any} id
+     */
+    createSelect(data, id) {
+        let selectObj = document.getElementById(id);
+        data.forEach(x => {
+            selectObj.add(new Option(x.name, x.id));
+        });
+    }
 }
