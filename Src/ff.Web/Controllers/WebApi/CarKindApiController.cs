@@ -113,7 +113,7 @@ namespace ff.Web.Controllers.WebApi
                         Name = carKindData.Name,
                         Year = carKindData.Year,
                     }, header);
-                return Ok(res);
+                return Ok("OK");
             }
             catch (Exception ex)
             {

@@ -2,50 +2,54 @@
     ViewData["Title"] = "Car Kind";
 }
 @section scripts{
-<link rel="stylesheet" href="~/css/sweetalert/sweetalert-dark.css">
-<script src="~/lib/sweetalert/sweetalert.min.js"></script>
 <script src="~/js/utils/bsUtil.js"></script>
 <script src="~/lib/underscore/underscore.js"></script>
-<script src="~/js/pagejs/carkind/carkind.js"></script>
+<script src="~/js/api/carKindApi.js" asp-append-version="true"></script>
+<script src="~/js/pagejs/carkind/carkind.js" asp-append-version="true"></script>
 <script>
     const bsUtil = new BsUtil();
+    let viewData = [];
+    let isEdit = false;
     create();
 </script>
 }
 
 <h1> <i class="tim-icons icon-delivery-fast"></i> @ViewData["Title"]</h1>
-     <div class="modal fade" id="setCarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">設定</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-           <div class="modal-body">
-            <form onsubmit="return false">
-              <div class="form-group">
-                <label for="carId-set" class="col-form-label">Id:</label>
-                <input type="text" class="form-control" id="carId-set" disabled>
-              </div> 
-              <div class="form-group">
-                <label for="carName-set" class="col-form-label">車種:</label>
-                    <input type="text" class="form-control text-muted" id="carName-set">
-              </div> 
-              <div class="form-group">
-                <label for="carYear-set" class="col-form-label">年份:</label>
-                <input type="number" class="form-control text-muted" id="carYear-set">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="toClear()">Close</button>
-            <button type="button" class="btn btn-primary" onclick="toAdd()">確定</button>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- modal strat-->
+<div class="modal fade" id="setCarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">設定</h5>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+      <div class="modal-body">
+       <form onsubmit="return false">
+         <div class="form-group">
+           <label for="carId-set" class="col-form-label">Id:</label>
+           <input type="text" class="form-control" id="carId-set" disabled>
+         </div> 
+         <div class="form-group">
+           <label for="carName-set" class="col-form-label">車種:</label>
+               <input type="text" class="form-control text-muted" id="carName-set">
+         </div> 
+         <div class="form-group">
+           <label for="carYear-set" class="col-form-label">年份:</label>
+           <input type="number" class="form-control text-muted" id="carYear-set">
+         </div>
+       </form>
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="toClear()">Close</button>
+           <button type="button" class="btn btn-primary" onclick="toAddOrUpdate()">確定</button>
+     </div>
+   </div>
+ </div>
+</div>
+<!-- modal end-->
+<!--content strat-->
 <div class="content" onload="create()">
  <div class="row mb-2">
       <div class="col-md-9">
@@ -98,3 +102,4 @@
      </div>
     </div>
  </div>
+<!--content end-->
