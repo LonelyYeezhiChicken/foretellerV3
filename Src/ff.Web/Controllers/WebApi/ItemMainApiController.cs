@@ -8,12 +8,12 @@ namespace ff.Web.Controllers.WebApi
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarKindApiController : ControllerBase
+    public class ItemMainApiController : ControllerBase
     {
-        private const string carKind = "CarKind";
+        private const string itemMain = "ItemMain";
         private readonly IHttpApiHelper httpApiHelper;
 
-        public CarKindApiController()
+        public ItemMainApiController()
         {
             httpApiHelper = new HttpApiHelper(ApiConfig.Url);
         }
@@ -27,7 +27,7 @@ namespace ff.Web.Controllers.WebApi
             Request.Headers.TryGetValue("APP_TOKEN", out var token);
             return new Dictionary<string, string>()
             {
-                    {"Authorization",$"Bearer {token.First()}" }
+                {"Authorization",$"Bearer {token.First()}" }
             };
         }
         /// <summary>
@@ -51,7 +51,7 @@ namespace ff.Web.Controllers.WebApi
             {
                 var header = GetHeader();
 
-                var res = await httpApiHelper.Get<List<CarkindViewModel>>(carKind, "", header);
+                var res = await httpApiHelper.Get<List<ItemMain>>(itemMain, "", header);
                 return Ok(res);
             }
             catch (Exception ex)
@@ -68,7 +68,7 @@ namespace ff.Web.Controllers.WebApi
             {
                 var header = GetHeader();
 
-                var res = await httpApiHelper.Get<List<CarkindViewModel>>(carKind, kind, header);
+                var res = await httpApiHelper.Get<ItemMain>(itemMain, kind, header);
                 return Ok(res);
             }
             catch (Exception ex)
@@ -79,17 +79,17 @@ namespace ff.Web.Controllers.WebApi
 
         // 新增
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(CarkindViewModel carKindData)
+        public async Task<IActionResult> Create(ItemMainViewModel carKindData)
         {
             try
             {
                 var header = GetHeader();
-                var res = await httpApiHelper.Post<string>(carKind,
+                var res = await httpApiHelper.Post<string>(itemMain,
                     new CarKindModel()
                     {
                         Id = carKindData.Id,
                         Name = carKindData.Name,
-                        Year = carKindData.Year,
+                        //Year = carKindData.Year,
                     }, header);
                 return Ok("OK");
             }
@@ -101,19 +101,19 @@ namespace ff.Web.Controllers.WebApi
 
         // 修改
         [HttpPost("Edit")]
-        public async Task<IActionResult> Edit(CarkindViewModel carKindData)
+        public async Task<IActionResult> Edit(ItemMainViewModel carKindData)
         {
             try
             {
                 var header = GetHeader();
-                var res = await httpApiHelper.Put<string>(carKind,
+                var res = await httpApiHelper.Put<string>(itemMain,
                     new CarKindModel()
                     {
                         Id = carKindData.Id,
                         Name = carKindData.Name,
-                        Year = carKindData.Year,
+                       // Year = carKindData.Year,
                     }, header);
-                return Ok("OK");
+                return Ok(res);
             }
             catch (Exception ex)
             {
@@ -128,7 +128,7 @@ namespace ff.Web.Controllers.WebApi
             try
             {
                 var header = GetHeader();
-                var res = await httpApiHelper.Delete<string>(carKind, $"?id={id}", header);
+                var res = await httpApiHelper.Delete<string>(itemMain, $"?id={id}", header);
                 return Ok("OK");
             }
             catch (Exception ex)

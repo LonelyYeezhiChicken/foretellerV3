@@ -1,33 +1,25 @@
-const userLogin = (data) => {
-    return req.post(`AccountApi/Login`, data);
-};
-
-const createTest = () => {
-    return req.get(`ErrorReportApi/Create`);
-};
-
-/**¨®ºØ¸ê°T */
-// ¸ü¤J¸ê®Æ
+ï»¿/**è»Šç¨®è³‡è¨Š */
+// è¼‰å…¥è³‡æ–™
 const loadCarKind = () => {
     return req.get(`CarKindApi/Load`);
 };
 
-// ½s¿è¸ê®Æ
+// ç·¨è¼¯è³‡æ–™
 const editCarKind = (data) => {
     return req.post(`CarKindApi/Edit`, data);
 };
 
-// §R°£¸ê®Æ
+// åˆªé™¤è³‡æ–™
 const delCarKind = (data) => {
     return req.delete(`CarKindApi/Delete`, data);
 };
 
-// ·s¼W¸ê®Æ
+// æ–°å¢è³‡æ–™
 const addCarKind = (data) => {
     return req.post(`CarKindApi/Create`, data);
 };
 
-// ·j´M¸ê®Æ
+// æœå°‹è³‡æ–™
 const findCarKind = (data) => {
     return req.post(`CarKindApi/Find`, data);
 };

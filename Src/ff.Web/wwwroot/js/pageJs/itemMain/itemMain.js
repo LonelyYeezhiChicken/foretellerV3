@@ -2,7 +2,7 @@
 /** 初始化載入 */
 function create() {
     // send api to loadCarKind
-    loadCarKind().then((res) => {
+    loadItemMain().then((res) => {
         render(res);
     });
 }
@@ -16,8 +16,9 @@ function render(res) {
     for (let i = 0; i < data.length; i++) {
         let row = document.createElement('tr');
         bsUtil.createRowData(i + 1, row, 1);
-        bsUtil.createRowData(data[i].name, row, 4);
-        bsUtil.createRowData(data[i].year, row, 3);
+        bsUtil.createRowData(data[i].car, row, 2);
+        bsUtil.createRowData(data[i].name, row, 3);
+        bsUtil.createRowData(data[i].comBackLong, row, 2);
 
         let btn = bsUtil.createRowBtn(data[i].id, '修改', 'primary', toShowEdit);
         let btnDel = bsUtil.createRowBtn(data[i].id, '刪除', 'danger', toDelete);
@@ -56,7 +57,7 @@ let toAddOrUpdate = _.throttle(function () {
 
 /** 搜尋 */
 let toFind = _.throttle(function () {
-    
+
 }, 5000);
 
 /** 新增視窗 */
