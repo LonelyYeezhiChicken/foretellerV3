@@ -4,9 +4,9 @@
 @section scripts{
         <script src="~/js/utils/bsUtil.js"></script>
         <script src="~/lib/underscore/underscore.js"></script>
-        <script src="~/js/api/itemMainApi.js" asp-append-version="true"></script>
-            <script src="~/js/pagejs/itemMain/itemMain.js" asp-append-version="true"></script>
-            <script src="~/js/api/carkindapi.js" asp-append-version="true"></script>
+        <script src="~/js/api/customerApi.js" asp-append-version="true"></script>
+        <script src="~/js/api/carkindapi.js" asp-append-version="true"></script>
+        <script src="~/js/pagejs/customer/customer.js" asp-append-version="true"></script>
         <script>
             const bsUtil = new BsUtil();
             let viewData = [];
@@ -35,53 +35,43 @@
                  </div>
                   <div class="row">
                     <div class="form-group col-md-5 pr-md-1">
-                      <label for="carYear-set" class="col-form-label">車種:</label>
+                      <label for="carKind-set" class="col-form-label">車種:</label>
                       <select id="carKind-set" class="form-control text-muted"></select>
                     </div>
                     <div class="form-group col-md-5 pr-md-1">
-                        <label for="carYear-set" class="col-form-label">名稱:</label>
+                        <label for="carName-set" class="col-form-label">名稱:</label>
                         <input type="text" class="form-control text-muted" id="carName-set">
                     </div>
                   </div>             
                   <div class="row">
                    <div class="form-group col-md-5 pr-md-1">
-                     <label for="carYear-set" class="col-form-label">預計保養里程:</label>
-                         <input type="number" class="form-control text-muted" id="carComBackLong-set">
+                         <label for="carCarNo-set" class="col-form-label">車牌:</label>
+                         <input type="text" class="form-control text-muted" id="carCarNo-set">
                    </div>
                    <div class="form-group col-md-5 pr-md-1">
-                       <label for="carYear-set" class="col-form-label">預計保養時間(單位:天):</label>
-                           <input type="number" class="form-control text-muted" id="carComBackTime-set">
+                         <label for="carPhone-set" class="col-form-label">電話:</label>
+                         <input type="number" class="form-control text-muted" id="carPhone-set">
                    </div>
                  </div>
                  <div class="row">
                    <div class="form-group col-md-5 pr-md-1">
-                     <label for="carYear-set" class="col-form-label">成本:</label>
-                         <input type="number" class="form-control text-muted" id="carCostAmount-set">
+                         <label for="carLastLong-set" class="col-form-label">最後里程:</label>
+                         <input type="number" class="form-control text-muted" id="carLastLong-set">
                    </div>
                    <div class="form-group col-md-5 pr-md-1">
-                       <label for="carYear-set" class="col-form-label">售價:</label>
-                           <input type="number" class="form-control text-muted" id="carSaleAmount-set">
+                        <label for="carLastDate-set" class="col-form-label">最後時間:</label>
+                        <input type="date" class="form-control text-muted" id="carLastDate-set">
                    </div>
-                 </div>
-                 <div class="row">
-                    <div class="form-group col-md-5 pr-md-1">
-                      <label for="carYear-set" class="col-form-label">庫存:</label>
-                          <input type="number" class="form-control text-muted" id="carCount-set">
-                    </div>
-                    <div class="form-group col-md-5 pr-md-1">
-                        <label for="carYear-set" class="col-form-label">最低庫存:</label>
-                            <input type="number" class="form-control text-muted" id="carLowItem-set">
-                    </div>
                  </div>
                  <div class="form-group">
-                   <label for="carYear-set" class="col-form-label">備註:</label>
+                       <label for="carMemo-set" class="col-form-label">備註:</label>
                        <input type="text" class="form-control text-muted" id="carMemo-set">
                  </div>
                </form>
              </div>
              <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="toClear()">Close</button>
-                   <button type="button" class="btn btn-primary" onclick="toAddOrUpdate()">確定</button>
+               <button type="button" class="btn btn-primary" onclick="toAddOrUpdate()">確定</button>
              </div>
            </div>
          </div>
@@ -93,9 +83,9 @@
               <div class="col-md-9">
                   <form class="form-horizontal">
                        <div class="form-group row">
-                           <label class="col-form-label text-primary">零件:</label>
+                               <label class="col-form-label text-primary">客戶:</label>
                            <div class="col-lg-3 col-sm-3">
-                               <input type="text" class="form-control" id="strKind" placeholder="搜尋車種" autocomplete="off">
+                               <input type="text" class="form-control" id="strKind" placeholder="搜尋客戶" autocomplete="off">
                            </div>
                            <button type="button" class="btn btn-primary disabledswitch" data-toggle="tooltip" title="搜尋"  onclick="toFind()"><i class="tim-icons icon-zoom-split"></i>搜尋</button>
                        </div>
@@ -109,7 +99,7 @@
              <div class="col-md-12">
                <div class="card ">
                  <div class="card-header">
-                    <h4 class="card-title">零件列表</h4>
+                    <h4 class="card-title">客戶列表</h4>
                  </div>
                  <div class="card-body">
                    <div class="table-responsive">
@@ -122,13 +112,16 @@
                            <th class="col-md-2">
                              車種
                            </th>
-                           <th class="col-md-3">
-                             零件名稱
+                           <th class="col-md-2">
+                             客戶名稱
                            </th>
                            <th class="col-md-2">
-                             保養里程
+                             最後里程
                            </th>
-                           <th class="col-md-4 text-center">
+                           <th class="col-md-2">
+                             最後時間
+                           </th>
+                           <th class="col-md-3 text-center">
                              設定
                            </th>
                          </tr>

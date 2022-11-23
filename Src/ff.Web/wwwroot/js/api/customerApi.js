@@ -1,25 +1,25 @@
 ﻿/**零件資訊 */
 // 載入資料
-const loadItemMain = () => {
+const loadCustomer = () => {
     return req.get(`CustomerApi/Load`);
 };
 
 // 編輯資料
-const editItemMain = (data) => {
+const editCustomer = (data) => {
     return req.post(`CustomerApi/Edit`, data);
 };
 
 // 刪除資料
-const delItemMain = (data) => {
+const delCustomer = (data) => {
     return req.delete(`CustomerApi/Delete`, data);
 };
 
 // 新增資料
-const addItemMain = (data) => {
+const addCustomer = (data) => {
     return req.post(`CustomerApi/Create`, data);
 };
 
 // 搜尋資料
-const findItemMain = (data) => {
+const findCustomer = (data) => {
     return req.post(`CustomerApi/Find`, data);
 };
