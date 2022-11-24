@@ -10,6 +10,6 @@
         public int Phone { get; set; }
         public string Memo { get; set; }
         public int LastLong { get; set; }
-        public DateTime LastDate { get; set; }      
+        public DateTime LastDate { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace ff.Web.Controllers.WebApi
                 var res = await httpApiHelper.Post<JwtModel>("Account", model);
                 return Ok(res.token.result);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest();
             }
