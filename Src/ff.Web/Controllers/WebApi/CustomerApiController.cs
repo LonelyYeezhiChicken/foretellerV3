@@ -1,8 +1,7 @@
 ﻿using ff.Web.Helper;
+using ff.Web.Models;
 using ff.Web.Models.ApiModel;
 using ff.Web.Models.Enum;
-using ff.Web.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ff.Web.Controllers.WebApi
