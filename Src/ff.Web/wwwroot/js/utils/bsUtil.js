@@ -57,4 +57,43 @@
             selectObj.add(new Option(x.name, x.id));
         });
     }
+
+    /**
+     * 動態生成卡片明細 + 點擊事件
+     * @param {any} id
+     * @param {any} name
+     */
+    createCardDetail(id, name, carType, func) {
+        let row = document.createElement('div');
+        row.classList.add('font-icon-list')
+        row.classList.add('col-lg-2');
+        row.classList.add('col-md-4');
+        row.classList.add('col-sm-4');
+        row.classList.add('col-xs-6');
+        row.classList.add('col-xs-6');
+
+        let detail = document.createElement('div');
+        detail.classList.add('font-icon-detail');
+
+        let icon = document.createElement('i');
+        icon.classList.add('tim-icons');
+        icon.classList.add('icon-settings-gear-63');
+
+        let rowData = document.createElement('h3');
+        rowData.innerHTML = name;
+
+        let typeData = document.createElement('h4');
+        typeData.innerHTML = carType;
+
+        detail.appendChild(icon);
+        detail.appendChild(rowData);
+        detail.appendChild(typeData);
+
+        row.appendChild(detail);
+
+        row.onclick = function () {
+            func(id);
+        }
+        return row;
+    }
 }

@@ -1,11 +1,57 @@
 ﻿@{
     ViewData["Title"] = "Order";
-}
-@section scripts{
-          
-}
+} 
 
+@section scripts{
+    <script src="~/js/utils/bsUtil.js"></script>
+    <script src="~/lib/underscore/underscore.js"></script>
+    <script src="~/js/api/itemMainApi.js" asp-append-version="true"></script>
+    <script src="~/js/pagejs/order/createOrder.js" asp-append-version="true"></script>
+    <script>
+        const bsUtil = new BsUtil();
+        let viewData = [];
+        let detail = [];
+        let isEdit = false;
+        created();
+    </script>
+}
 <h1> <i class="tim-icons icon-cart"></i> @ViewData["Title"]</h1>
+     <!-- modal strat-->
+<div class="modal fade" id="setCarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">訂單資料</h5>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+      <div class="modal-body">
+       <form onsubmit="return false">
+         <div class="form-group">
+             <label for="customer-set" class="col-form-label">客戶:</label>
+             <select id="customer-set" class="form-control text-muted"></select>
+          </div>             
+          <div class="row">
+           <div class="form-group col-md-5 pr-md-1">
+                 <label for="carComBackLong-set" class="col-form-label">保養里程:</label>
+                 <input type="number" class="form-control text-muted" id="carComBackLong-set">
+           </div>
+           <div class="form-group col-md-5 pr-md-1">
+                <label for="carComBackTime-set" class="col-form-label">保養時間:</label>
+               <input type="date" class="form-control text-muted" id="carComBackTime-set">
+           </div>
+         </div>
+       </form>
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="toClear()">Close</button>
+           <button type="button" class="btn btn-primary" onclick="toAddOrUpdate()">確定</button>
+     </div>
+   </div>
+ </div>
+</div>
+<!-- modal end-->
 <div class="content">
     <div class="row">
       <div class="col-md-8">
@@ -14,18 +60,8 @@
             <h5 class="title">選擇零件</h5>
           </div>
           <div class="card-body">
-            <div class="row">
-                  <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
-                    <div class="font-icon-detail">
-                      <i class="tim-icons icon-alert-circle-exc"></i>
-                      <p>icon-alert-circle-exc</p>
-                    </div>
-                  </div>
-                  
+            <div class="row" id="itemDetail">
             </div>
-          </div>
-          <div class="card-footer">
-            <button type="submit" class="btn btn-fill btn-primary">Save</button>
           </div>
         </div>
       </div>     
@@ -35,61 +71,12 @@
             <h5 class="title">訂單明細</h5>
           </div>
           <div class="card-body">
-            <form>
-              <div class="row">
-                <div class="col-md-5 pr-md-1">
-                  <div class="form-group">
-                    <label>Company (disabled)</label>
-                    <input type="text" class="form-control" disabled="" placeholder="Company" value="Creative Code Inc.">
-                  </div>
-                </div>
-                <div class="col-md-3 px-md-1">
-                  <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" class="form-control" placeholder="Username" value="michael23">
-                  </div>
-                </div>
-                <div class="col-md-4 pl-md-1">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" placeholder="mike@email.com">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6 pr-md-1">
-                  <div class="form-group">
-                    <label>First Name</label>
-                    <input type="text" class="form-control" placeholder="Company" value="Mike">
-                  </div>
-                </div>
-                <div class="col-md-6 pl-md-1">
-                  <div class="form-group">
-                    <label>Last Name</label>
-                    <input type="text" class="form-control" placeholder="Last Name" value="Andrew">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label>Address</label>
-                    <input type="text" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="form-group">
-                    <label>About Me</label>
-                    <textarea rows="4" cols="80" class="form-control" placeholder="Here can be your description" value="Mike">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
-                  </div>
-                </div>
-              </div>
-            </form>
+            <ol id="orderDetail">
+            </ol>
           </div>
           <div class="card-footer">
-            <button type="submit" class="btn btn-fill btn-primary">Save</button>
+            <button type="submit" class="btn btn-fill btn-danger" onclick="toClearCar()">Clear</button>
+                <button type="submit" class="btn btn-fill btn-primary" onclick="toShowAdd()">Save</button>
           </div>
         </div>
       </div>     
