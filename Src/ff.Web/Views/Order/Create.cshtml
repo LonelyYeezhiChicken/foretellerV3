@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Order";
+} 
+
+@section scripts{
+    <script src="~/js/utils/bsUtil.js"></script>
+    <script src="~/lib/underscore/underscore.js"></script>
+    <script src="~/js/api/itemMainApi.js" asp-append-version="true"></script>
+    <script src="~/js/pagejs/order/createOrder.js" asp-append-version="true"></script>
+    <script>
+        const bsUtil = new BsUtil();
+        let viewData = [];
+        let detail = [];
+        let isEdit = false;
+        created();
+    </script>
+}
+<h1> <i class="tim-icons icon-cart"></i> @ViewData["Title"]</h1>
+     <!-- modal strat-->
+<div class="modal fade" id="setCarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">訂單資料</h5>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+      <div class="modal-body">
+       <form onsubmit="return false">
+         <div class="form-group">
+             <label for="customer-set" class="col-form-label">客戶:</label>
+             <select id="customer-set" class="form-control text-muted"></select>
+          </div>             
+          <div class="row">
+           <div class="form-group col-md-5 pr-md-1">
+                 <label for="carComBackLong-set" class="col-form-label">保養里程:</label>
+                 <input type="number" class="form-control text-muted" id="carComBackLong-set">
+           </div>
+           <div class="form-group col-md-5 pr-md-1">
+                <label for="carComBackTime-set" class="col-form-label">保養時間:</label>
+               <input type="date" class="form-control text-muted" id="carComBackTime-set">
+           </div>
+         </div>
+       </form>
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="toClear()">Close</button>
+           <button type="button" class="btn btn-primary" onclick="toAddOrUpdate()">確定</button>
+     </div>
+   </div>
+ </div>
+</div>
+<!-- modal end-->
+<div class="content">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="title">選擇零件</h5>
+          </div>
+          <div class="card-body">
+            <div class="row" id="itemDetail">
+            </div>
+          </div>
+        </div>
+      </div>     
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="title">訂單明細</h5>
+          </div>
+          <div class="card-body">
+            <ol id="orderDetail">
+            </ol>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-fill btn-danger" onclick="toClearCar()">Clear</button>
+                <button type="submit" class="btn btn-fill btn-primary" onclick="toShowAdd()">Save</button>
+          </div>
+        </div>
+      </div>     
+    </div>
+</div>

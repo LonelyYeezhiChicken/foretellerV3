@@ -27,31 +27,40 @@
                     </a>
                 </div>
                 <ul class="nav">
+                     <li>
+                        <a href="#dataSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">資料維護 <i class="tim-icons icon-minimal-down"></i></a>
+                         <ul class="collapse list-unstyled" id="dataSubmenu">
+                              <li>
+                                  <a asp-controller="CarKind" asp-action="Index">
+                                    <i class="tim-icons icon-delivery-fast"></i>
+                                    <p>車種資料維護</p>
+                                  </a>
+                                  <a asp-controller="ItemMain" asp-action="Index">
+                                    <i class="tim-icons icon-settings"></i>
+                                     <p>零件資料維護</p>
+                                  </a>
+                                  <a asp-controller="Customer" asp-action="Index">
+                                    <i class="tim-icons icon-badge"></i>
+                                    <p>客戶資料維護</p>
+                                  </a>
+                              </li>
+                         </ul>
+                     </li>
                     <li>
-                        <a asp-controller="CarKind" asp-action="Index">
-                            <i class="tim-icons icon-delivery-fast"></i>
-                            <p>車種資料維護</p>
-                        </a>
+                        <a href="#orderSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">訂單功能 <i class="tim-icons icon-minimal-down"></i></a>
+                        <ul class="collapse list-unstyled " id="orderSubmenu">
+                            <li>
+                                 <a asp-controller="Order" asp-action="Create">
+                                     <i class="tim-icons icon-cart"></i>
+                                     <p>新增訂單</p>
+                                 </a>
+                                 <a asp-controller="Error" asp-action="Build">
+                                     <i class="tim-icons icon-notes"></i>
+                                     <p>訂單查詢</p>
+                                 </a>
+                            </li>
+                        </ul>
                     </li>
-
-                </ul>
-                <ul class="nav">
-                    <li>
-                        <a asp-controller="ItemMain" asp-action="Index">
-                            <i class="tim-icons icon-settings"></i>
-                            <p>零件資料維護</p>
-                        </a>
-                    </li>
-
-                </ul>
-                <ul class="nav">
-                    <li>
-                        <a asp-controller="Customer" asp-action="Index">
-                            <i class="tim-icons icon-badge"></i>
-                            <p>客戶資料維護</p>
-                        </a>
-                    </li>
-
                 </ul>
             </div>
         </div>
