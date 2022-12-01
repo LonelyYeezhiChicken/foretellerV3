@@ -5,6 +5,16 @@ function created() {
     loadItemMain().then((res) => {
         render(res);
     });
+
+    loadCustomer().then((res) => {
+        customerList = res.data.map(v => {
+            return {
+                id: v.id,
+                name: ` ${v.car} - ${v.name}`
+            };
+        });
+        bsUtil.createSelect(customerList, "customer-set");
+    });
 }
 
 /** 畫面渲染
@@ -20,7 +30,7 @@ function render(res) {
 }
 
 /** 加入購物車*/
-let toCar= _.throttle(function (id) {
+let toCar = _.throttle(function (id) {
     let data = viewData.find(v => v.id.includes(id));
 
     let row = document.createElement('li');
@@ -29,7 +39,7 @@ let toCar= _.throttle(function (id) {
     document.getElementById('orderDetail').appendChild(row);
 
     detail.push({
-        id:'',
+        id: '',
         itemCode: data.id,
         itemName: data.name,
         amount: data.saleAmount,
@@ -50,68 +60,19 @@ let toClearCar = _.throttle(function () {
     }
 }, 5000);
 
+/** 新增 */
+let toAdd = _.throttle(function () {
+    let data = getViewData();
 
-/** 刪除 */
-let toDelete = _.throttle(function (id) {
-    console.log('Del');
-    delItemMain({ id: id }).then((res) => {
+    addOrder(data).then((res) => {
         if (res.data === 'OK')
             location.reload();
     });
 }, 5000);
 
-/** 新增或修改 */
-let toAddOrUpdate = _.throttle(function () {
-    let data = getViewData();
-
-    // 判斷新增或修改
-    if (isEdit === true) {
-        editItemMain(data).then((res) => {
-            if (res.data === 'OK')
-                location.reload();
-        });
-    } else {
-        addItemMain(data).then((res) => {
-            if (res.data === 'OK')
-                location.reload();
-        });
-    }
-}, 5000);
-
-/** 搜尋 */
-let toFind = _.throttle(function (id) {
-    console.log(id);
-}, 5000);
-
 /** 新增視窗 */
 let toShowAdd = _.throttle(function () {
-    console.log('Add');
     toClear();
-    isEdit = false;
-    //顯示
-    $('#setCarModal').modal('show')
-}, 500);
-
-/** 編輯視窗 */
-let toShowEdit = _.throttle(function (id) {
-    console.log('Edit');
-    toClear();
-
-    let data = viewData.filter(v => v.id.includes(id));
-
-    document.getElementById("carId-set").value = data[0].id;
-    document.getElementById("carName-set").value = data[0].name;
-    document.getElementById("carComBackLong-set").value = data[0].comBackLong;
-    document.getElementById("carComBackTime-set").value = data[0].comBackTime;
-    document.getElementById("carCostAmount-set").value = data[0].costAmount;
-    document.getElementById("carSaleAmount-set").value = data[0].saleAmount;
-    document.getElementById("carCount-set").value = data[0].count;
-    document.getElementById("carLowItem-set").value = data[0].lowItem;
-    document.getElementById("carMemo-set").value = data[0].memo;
-    document.getElementById("carKind-set").value = data[0].carType;
-
-
-    isEdit = true;
     //顯示
     $('#setCarModal').modal('show')
 }, 500);
@@ -125,29 +86,29 @@ function toClear() {
 /** 取出畫面資料 */
 function getViewData() {
 
-    let carId = document.getElementById("carId-set").value;
-    let carName = document.getElementById("carName-set").value;
-    let carComBackLong = document.getElementById("carComBackLong-set").value;
-    let carComBackTime = document.getElementById("carComBackTime-set").value;
-    let carCostAmount = document.getElementById("carCostAmount-set").value;
-    let carSaleAmount = document.getElementById("carSaleAmount-set").value;
-    let carCount = document.getElementById("carCount-set").value;
-    let carLowItem = document.getElementById("carLowItem-set").value;
-    let carMemo = document.getElementById("carMemo-set").value;
-    let carKind = document.getElementById("carKind-set").value;
+    let customerId = document.getElementById("customer-set").value;
+    let comBackLong = document.getElementById("carComBackLong-set").value;
+    let comBackTime = document.getElementById("carComBackTime-set").value;
+
+    let detailData = detail.map(v => {
+        return {
+            Id: v.id,
+            ItemCode: v.itemCode,
+            ItemName: v.itemName,
+            Amount: v.amount,
+            Count: v.count,
+            DiscountType: v.discountType,
+            DiscountName: v.discountName,
+            Discount: v.discount,
+            TotalAmount: v.totalAmount
+        };
+    });
 
     return {
-        Id: carId,
-        Name: carName,
-        ComBackLong: carComBackLong,
-        ComBackTime: carComBackTime,
-        CostAmount: carCostAmount,
-        SaleAmount: carSaleAmount,
-        Count: carCount,
-        LowItem: carLowItem,
-        Memo: carMemo,
-        CarType: carKind,
-        Car: ''
+        CustomerId: customerId,
+        Long: comBackLong,
+        OrderDate: comBackTime,
+        Detail: detailData
     };
 }
 

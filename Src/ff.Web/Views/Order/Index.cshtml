@@ -1,0 +1,140 @@
+﻿@{
+    ViewData["Title"] = "Orders";
+}
+@section scripts{
+        <script src="~/js/utils/bsUtil.js"></script>
+        <script src="~/lib/underscore/underscore.js"></script>
+        <script src="~/js/api/customerApi.js" asp-append-version="true"></script>
+        <script src="~/js/api/orderApi.js" asp-append-version="true"></script>
+        <script src="~/js/pagejs/order/getOrder.js" asp-append-version="true"></script>
+        <script>
+            const bsUtil = new BsUtil();
+            let viewData = [];
+            let carkindList = [];
+            let isEdit = false;
+            create();
+        </script>
+}
+
+        <h1> <i class="tim-icons icon-settings"></i> @ViewData["Title"]</h1>
+        <!-- modal strat-->
+        <div class="modal fade" id="setCarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">設定</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+              <div class="modal-body">
+               <form onsubmit="return false">
+                 <div class="form-group">
+                   <label for="carId-set" class="col-form-label">Id:</label>
+                   <input type="text" class="form-control" id="carId-set" disabled>
+                 </div>
+                  <div class="row">
+                    <div class="form-group col-md-5 pr-md-1">
+                      <label for="carYear-set" class="col-form-label">車種:</label>
+                      <select id="carKind-set" class="form-control text-muted"></select>
+                    </div>
+                    <div class="form-group col-md-5 pr-md-1">
+                        <label for="carYear-set" class="col-form-label">名稱:</label>
+                        <input type="text" class="form-control text-muted" id="carName-set">
+                    </div>
+                  </div>             
+                  <div class="row">
+                   <div class="form-group col-md-5 pr-md-1">
+                     <label for="carYear-set" class="col-form-label">預計保養里程:</label>
+                         <input type="number" class="form-control text-muted" id="carComBackLong-set">
+                   </div>
+                   <div class="form-group col-md-5 pr-md-1">
+                       <label for="carYear-set" class="col-form-label">預計保養時間(單位:天):</label>
+                           <input type="number" class="form-control text-muted" id="carComBackTime-set">
+                   </div>
+                 </div>
+                 <div class="row">
+                   <div class="form-group col-md-5 pr-md-1">
+                     <label for="carYear-set" class="col-form-label">成本:</label>
+                         <input type="number" class="form-control text-muted" id="carCostAmount-set">
+                   </div>
+                   <div class="form-group col-md-5 pr-md-1">
+                       <label for="carYear-set" class="col-form-label">售價:</label>
+                           <input type="number" class="form-control text-muted" id="carSaleAmount-set">
+                   </div>
+                 </div>
+                 <div class="row">
+                    <div class="form-group col-md-5 pr-md-1">
+                      <label for="carYear-set" class="col-form-label">庫存:</label>
+                          <input type="number" class="form-control text-muted" id="carCount-set">
+                    </div>
+                    <div class="form-group col-md-5 pr-md-1">
+                        <label for="carYear-set" class="col-form-label">最低庫存:</label>
+                            <input type="number" class="form-control text-muted" id="carLowItem-set">
+                    </div>
+                 </div>
+                 <div class="form-group">
+                   <label for="carYear-set" class="col-form-label">備註:</label>
+                       <input type="text" class="form-control text-muted" id="carMemo-set">
+                 </div>
+               </form>
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="toClear()">Close</button>
+                   <button type="button" class="btn btn-primary" onclick="toAddOrUpdate()">確定</button>
+             </div>
+           </div>
+         </div>
+        </div>
+        <!-- modal end-->
+        <!--content strat-->
+        <div class="content" onload="create()">
+         <div class="row mb-2">
+              <div class="col-md-9">
+                  <form class="form-horizontal">
+                       <div class="form-group row">
+                           <label class="col-form-label text-primary">客戶:</label>
+                           <div class="col-lg-3 col-sm-3">
+                             <select id="customer-set" class="form-control text-muted"></select>
+                           </div>
+                           <button type="button" class="btn btn-primary disabledswitch" data-toggle="tooltip" title="搜尋"  onclick="toFind()"><i class="tim-icons icon-zoom-split"></i>搜尋</button>
+                       </div>
+                   </form>
+              </div>
+         </div>
+           <div class="row">
+             <div class="col-md-12">
+               <div class="card ">
+                 <div class="card-header">
+                    <h4 class="card-title">訂單列表</h4>
+                 </div>
+                 <div class="card-body">
+                   <div class="table-responsive">
+                     <table class="table tablesorter " id="">
+                       <thead class=" text-primary">
+                         <tr>
+                           <th class="col-md-1">
+                             #
+                           </th>
+                           <th class="col-md-2">
+                            里程
+                           </th>
+                           <th class="col-md-2">
+                            時間
+                           </th>
+                           <th class="col-md-4 text-center">
+                             設定
+                           </th>
+                         </tr>
+                       </thead>
+                       <tbody id="car-tbody">
+
+                       </tbody>
+                     </table>
+                   </div>
+                 </div>
+               </div>
+             </div>
+            </div>
+         </div>
+        <!--content end-->
