@@ -11,6 +11,12 @@ namespace ff.Web.Controllers
             _logger = logger;
         }
 
+        public IActionResult Index()
+        {
+            _logger.LogInformation("Go To Order ...");
+            return View();
+        }
+
         public IActionResult Create()
         {
             _logger.LogInformation("Go To Order Create ...");

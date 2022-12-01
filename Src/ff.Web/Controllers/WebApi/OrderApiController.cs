@@ -58,7 +58,7 @@ namespace ff.Web.Controllers.WebApi
                     detail.Add(new OrderDetail()
                     {
                         Id = data.Id,
-                        ItemCode =data.ItemCode,
+                        ItemCode = data.ItemCode,
                         ItemName = data.ItemName,
                         Amount = data.Amount,
                         Count = data.Count,
@@ -79,6 +79,22 @@ namespace ff.Web.Controllers.WebApi
                         Detail = detail
                     }, header);
                 return Ok("OK");
+            }
+            catch (Exception ex)
+            {
+                return GetException(ex);
+            }
+        }
+
+        // 查詢
+        [HttpGet("Load")]
+        public async Task<IActionResult> Load([FromQuery] string customerId)
+        {
+            try
+            {
+                var header = GetHeader();
+                var res = await httpApiHelper.Get<List<Order>>(carKind, $"?customerId={customerId}", header);
+                return Ok(res);
             }
             catch (Exception ex)
             {
